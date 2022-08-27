@@ -4,3 +4,15 @@ server:
 spring:
   application:
     name: "spring security oauth2(social login)"
+
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: "1284893432313301"
+            client-secret: "7bbcc67af4e86849634bee331c84f92c"
+          google:
+            client-id: "71189845700-74p1velvvr0uc0i8sf5q1p3ggqq4dvr8.apps.googleusercontent.com"
+            client-secret: "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"
+
