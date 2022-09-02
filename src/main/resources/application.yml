@@ -10,6 +10,7 @@ spring:
       client:
         registration:
           facebook: # https://developers.facebook.com/에서 프로젝트 만들고 아래 두 값을 얻어와야함
+            # client-id에 커서를 두고 ctrl + b 를 누르면 해당 client-id와 client-secret이 어디로 바인딩이 되는지 알 수 있다.
             client-id: "1284893432313301"
             client-secret: "7bbcc67af4e86849634bee331c84f92c"
           google: # https://console.cloud.google.com/apis/dashboard에서 프로젝트 만들고 아래 두 값을 얻어와야함
