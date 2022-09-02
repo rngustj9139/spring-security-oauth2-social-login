@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: "spring security oauth2(social login)"
+  main:
+    allow-circular-references: true # SecurityConfig 파일에서 커스텀 설정할때 빈의 순환참조가 일어나서 에러가 발생하는 현상 해결
 
   security:
     oauth2:

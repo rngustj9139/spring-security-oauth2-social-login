@@ -3,6 +3,7 @@ package koo.real.spring.security.oauth2.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,44 +43,44 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Customizer.withDefaults() 대신 위의 코드를 써야한다.
     }
 
-    // 커스텀 설정 시작(Below All Codes) => google, facebook이 아닌 카카오나 네이버 같은 소셜 로그인을 이용할려면 커스텀 설정을 해야한다.
-    private ClientRegistration googleClientRegistration() {
-        final String clientId = environment.getProperty(registration + "google.client-id");
-        final String clientSecret = environment.getProperty(registration + "google.client-secret");
-
-        return CommonOAuth2Provider
-                .GOOGLE
-                .getBuilder("google")
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .build();
-    }
-
-    private ClientRegistration facebookClientRegistration() {
-        final String clientId = environment.getProperty(registration + "facebook.client-id");
-        final String clientSecret = environment.getProperty(registration + "facebook.client-secret");
-
-        return CommonOAuth2Provider
-                .FACEBOOK
-                .getBuilder("facebook")
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .build();
-    }
-
-    @Bean
-    public ClientRegistrationRepository clientRegistrationRepository() { // 위에서 만든 ClientRegistration들을 저장할 Repository를 정의
-        final List<ClientRegistration> clientRegistrations = Arrays.asList(
-            googleClientRegistration(),
-            facebookClientRegistration()
-        );
-
-        return new InMemoryClientRegistrationRepository(clientRegistrations);
-    }
-
-    @Bean
-    public OAuth2AuthorizedClientService authorizedClientService() { // 실제로 로그인이 수행되는 함수
-        return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
-    }
+//    // 커스텀 설정 시작(Below All Codes) => google, facebook이 아닌 카카오나 네이버 같은 소셜 로그인을 이용할려면 커스텀 설정을 해야한다.
+//    private ClientRegistration googleClientRegistration() {
+//        final String clientId = environment.getProperty(registration + "google.client-id");
+//        final String clientSecret = environment.getProperty(registration + "google.client-secret");
+//
+//        return CommonOAuth2Provider
+//                .GOOGLE
+//                .getBuilder("google")
+//                .clientId(clientId)
+//                .clientSecret(clientSecret)
+//                .build();
+//    }
+//
+//    private ClientRegistration facebookClientRegistration() {
+//        final String clientId = environment.getProperty(registration + "facebook.client-id");
+//        final String clientSecret = environment.getProperty(registration + "facebook.client-secret");
+//
+//        return CommonOAuth2Provider
+//                .FACEBOOK
+//                .getBuilder("facebook")
+//                .clientId(clientId)
+//                .clientSecret(clientSecret)
+//                .build();
+//    }
+//
+//    @Bean
+//    public ClientRegistrationRepository clientRegistrationRepository() { // 위에서 만든 ClientRegistration들을 저장할 Repository를 정의
+//        final List<ClientRegistration> clientRegistrations = Arrays.asList(
+//            googleClientRegistration(),
+//            facebookClientRegistration()
+//        );
+//
+//        return new InMemoryClientRegistrationRepository(clientRegistrations);
+//    }
+//
+//    @Bean
+//    public OAuth2AuthorizedClientService authorizedClientService() { // 실제로 로그인이 수행되는 함수
+//        return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
+//    }
 
 }
