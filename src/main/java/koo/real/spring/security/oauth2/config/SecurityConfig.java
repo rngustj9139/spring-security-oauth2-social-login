@@ -1,5 +1,6 @@
 package koo.real.spring.security.oauth2.config;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final Environment environment;
@@ -65,6 +66,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .getBuilder("facebook")
 //                .clientId(clientId)
 //                .clientSecret(clientSecret)
+//                .scope( // 스코프 설정
+//                        "public_profile",
+//                        "email",
+//                        "user_birthday",
+//                        "user_gender"
+//                )
+//                .userInfoUri("https://graph.facebook.com/me?fields=id,name,email,picture,gender,birthday")
 //                .build();
 //    }
 //
@@ -80,6 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //    @Bean
 //    public OAuth2AuthorizedClientService authorizedClientService() { // 실제로 로그인이 수행되는 함수
+//
 //        return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
 //    }
 
