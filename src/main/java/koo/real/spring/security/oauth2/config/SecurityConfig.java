@@ -27,6 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final Environment environment;
     private final String registration = "spring.security.oauth2.client.registration."; // application.yml 파일에 있는 데이터를 가져올 것임
+    private final FacebookOAuth2UserService facebookOAuth2UserService;
+    private final GoogleOAuth2UserService googleOAuth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception { // Authorization Code Grant Type 이용
@@ -36,10 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ).oauth2Login(oauth2 -> oauth2
                 .clientRegistrationRepository(clientRegistrationRepository())
                 .authorizedClientService(authorizedClientService())
-                .userInfoEndpoint( // userInfoEndpoint는 oauth2 로그인이 성공한 뒤 유저 정보를 가져오는것을 담당한다.
+                .userInfoEndpoint( // userInfoEndpoint는 oauth2 로그인이 성공한 뒤 유저 정보를 가져오는것을 담당한다. (oauth2 로그인 뒤 사용자 정보를 가져오고 이미 이 사용자가 DB에 있다면 회원가입을 하지 않고 없다면 회원가입이 되도록 할 것이다.)
                     user -> user
-                        .oidcUserService() // google 인증 (OpenID connect 1.0 사용)
-                        .userService() // facebook 인증
+                        .oidcUserService(googleOAuth2UserService) // google 인증 (OpenID connect 1.0 사용)
+                        .userService(facebookOAuth2UserService) // facebook 인증
                 )
         );
         // auto configuration이 아닌 아래 코드(커스텀 설정 코드)를 쓴다면

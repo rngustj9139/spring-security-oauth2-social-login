@@ -27,8 +27,8 @@ spring:
     hibernate:
       ddl-auto: create
 
-    datasource:
-      url: jdbc:mysql://localhost:3366/social # 3366은 docker-compose.yml에서 설정해둔 포트번호이다. social도 해당 파일에서 설정한 데이터베이스 파일 이름이다.
-      username: root
-      password:
-      driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://localhost:3366/social # 3366은 docker-compose.yml에서 설정해둔 포트번호이다. social도 해당 파일에서 설정한 데이터베이스 파일 이름이다.
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
